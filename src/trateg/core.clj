@@ -1,7 +1,7 @@
 (ns trateg.core
   (:require [cheshire.core :as json]
             [cheshire.generate :as json-gen]
-            [clojure.java.browse :refer [browse-url]]
+            [clojure.java.shell :as shell]
             [medley.core :as m]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -295,6 +295,12 @@
 (json-gen/add-encoder java.time.ZonedDateTime
                       (fn [zdt gen] (.writeNumber gen (-> zdt .toInstant .toEpochMilli str))))
 
+(defn browse-file [f]
+  (let [open-script (if (-> "os.name" System/getProperty #{"Linux"})
+                      "xdg-open"
+                      "open")]
+    (shell/sh open-script (str f))))
+
 (defn view-highchart [opts]
   (let [html-base (slurp "resources/highcharts/base.html")
         temp-file (doto (java.io.File/createTempFile
@@ -305,7 +311,7 @@
          json/encode
          (format html-base)
          (spit temp-file))
-    (browse-url (.getPath temp-file))))
+    (browse-file temp-file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Tools and charts to analyze result sets;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
