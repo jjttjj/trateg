@@ -299,7 +299,7 @@
   (let [open-script (if (-> "os.name" System/getProperty #{"Linux"})
                       "xdg-open"
                       "open")]
-    (shell/sh open-script (str f))))
+    (-> (shell/sh open-script (str f)) :err empty?)))
 
 (defn view-highchart [opts]
   (let [html-base (slurp "resources/highcharts/base.html")
