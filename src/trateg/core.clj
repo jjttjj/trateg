@@ -302,10 +302,12 @@
     (-> (shell/sh open-script (str f)) :err empty?)))
 
 (defn view-highchart [opts]
-  (let [html-base (slurp "resources/highcharts/base.html")
+  (let [html-base (slurp (io/resource "highcharts/base.html"))
+        temp-dir  (java.io.File. "tmp-charts")
+        _         (when-not (.exists temp-dir) (.mkdir temp-dir))
         temp-file (doto (java.io.File/createTempFile
                          "highcharts"
-                         ".html" (java.io.File. "tmp-charts"))
+                         ".html" temp-dir)
                     .deleteOnExit)]
     (->> opts
          json/encode
