@@ -1,0 +1,323 @@
+;; gorilla-repl.fileformat = 2
+
+;; @@ [meta]
+{:tagline "dynamic asset allocation", :tags ""}
+
+;; @@
+
+;; **
+;;; # Trateg Library for backtesting
+;; **
+
+;; @@ [clj]
+; Automatically Download Dependencies (if they are not installed already) 
+ (use '[pinkgorilla.helper]) 
+ (pinkgorilla.helper/add-dependencies 
+   '[trateg "0.1.1-SNAPSHOT"])
+;; @@
+;; =>
+;;; ["^ ","~:type","~:list-like","~:open",["~:span",["^ ","~:class","clj-map"],"{"],"~:close",["^3",["^ ","^4","clj-map"],"}"],"~:separator",["^3",", "],"~:items",["~#list",[["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","~:html","~:content",["^3",["^ ","^4","clj-symbol"],"com.google.javascript/closure-compiler-externs"],"~:value","com.google.javascript/closure-compiler-externs"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"v20160911"],"^;","v20160911"]]],"^;","[com.google.javascript/closure-compiler-externs v20160911]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.google.javascript/closure-compiler-externs v20160911] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.javascript/closure-compiler-unshaded"],"^;","com.google.javascript/closure-compiler-unshaded"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"v20160911"],"^;","v20160911"]]],"^;","[com.google.javascript/closure-compiler-unshaded v20160911]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.javascript/closure-compiler-externs"],"^;","com.google.javascript/closure-compiler-externs"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"v20160911"],"^;","v20160911"]]],"^;","[com.google.javascript/closure-compiler-externs v20160911]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.jsinterop/jsinterop-annotations"],"^;","com.google.jsinterop/jsinterop-annotations"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.0.0"],"^;","1.0.0"]]],"^;","[com.google.jsinterop/jsinterop-annotations 1.0.0]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"args4j"],"^;","args4j"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.0.26"],"^;","2.0.26"]]],"^;","[args4j 2.0.26]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.code.findbugs/jsr305"],"^;","com.google.code.findbugs/jsr305"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.3.9"],"^;","1.3.9"]]],"^;","[com.google.code.findbugs/jsr305 1.3.9]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.code.gson/gson"],"^;","com.google.code.gson/gson"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.2.4"],"^;","2.2.4"]]],"^;","[com.google.code.gson/gson 2.2.4]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.guava/guava"],"^;","com.google.guava/guava"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"19.0"],"^;","19.0"]]],"^;","[com.google.guava/guava 19.0]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.protobuf/protobuf-java"],"^;","com.google.protobuf/protobuf-java"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.5.0"],"^;","2.5.0"]]],"^;","[com.google.protobuf/protobuf-java 2.5.0]"]]],"^;","#{[com.google.javascript/closure-compiler-externs v20160911] [com.google.jsinterop/jsinterop-annotations 1.0.0] [args4j 2.0.26] [com.google.code.findbugs/jsr305 1.3.9] [com.google.code.gson/gson 2.2.4] [com.google.guava/guava 19.0] [com.google.protobuf/protobuf-java 2.5.0]}"]]],"^;","[[com.google.javascript/closure-compiler-unshaded v20160911] #{[com.google.javascript/closure-compiler-externs v20160911] [com.google.jsinterop/jsinterop-annotations 1.0.0] [args4j 2.0.26] [com.google.code.findbugs/jsr305 1.3.9] [com.google.code.gson/gson 2.2.4] [com.google.guava/guava 19.0] [com.google.protobuf/protobuf-java 2.5.0]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"trateg"],"^;","trateg"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.1.1-SNAPSHOT"],"^;","0.1.1-SNAPSHOT"]]],"^;","[trateg 0.1.1-SNAPSHOT]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"net.cgrand/xforms"],"^;","net.cgrand/xforms"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.18.2"],"^;","0.18.2"]]],"^;","[net.cgrand/xforms 0.18.2]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.ta4j/ta4j-core"],"^;","org.ta4j/ta4j-core"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.12"],"^;","0.12"]]],"^;","[org.ta4j/ta4j-core 0.12]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/clojure"],"^;","org.clojure/clojure"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.10.1-RC1"],"^;","1.10.1-RC1"]]],"^;","[org.clojure/clojure 1.10.1-RC1]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"medley"],"^;","medley"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.2.0"],"^;","1.2.0"]]],"^;","[medley 1.2.0]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/data.csv"],"^;","org.clojure/data.csv"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.1.4"],"^;","0.1.4"]]],"^;","[org.clojure/data.csv 0.1.4]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"cheshire"],"^;","cheshire"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"5.8.1"],"^;","5.8.1"]]],"^;","[cheshire 5.8.1]"]]],"^;","#{[net.cgrand/xforms 0.18.2] [org.ta4j/ta4j-core 0.12] [org.clojure/clojure 1.10.1-RC1] [medley 1.2.0] [org.clojure/data.csv 0.1.4] [cheshire 5.8.1]}"]]],"^;","[[trateg 0.1.1-SNAPSHOT] #{[net.cgrand/xforms 0.18.2] [org.ta4j/ta4j-core 0.12] [org.clojure/clojure 1.10.1-RC1] [medley 1.2.0] [org.clojure/data.csv 0.1.4] [cheshire 5.8.1]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"tigris"],"^;","tigris"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.1.1"],"^;","0.1.1"]]],"^;","[tigris 0.1.1]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[tigris 0.1.1] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"net.cgrand/xforms"],"^;","net.cgrand/xforms"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.18.2"],"^;","0.18.2"]]],"^;","[net.cgrand/xforms 0.18.2]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"net.cgrand/macrovich"],"^;","net.cgrand/macrovich"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.0"],"^;","0.2.0"]]],"^;","[net.cgrand/macrovich 0.2.0]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/clojurescript"],"^;","org.clojure/clojurescript"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.9.293"],"^;","1.9.293"]]],"^;","[org.clojure/clojurescript 1.9.293]"]]],"^;","#{[net.cgrand/macrovich 0.2.0] [org.clojure/clojurescript 1.9.293]}"]]],"^;","[[net.cgrand/xforms 0.18.2] #{[net.cgrand/macrovich 0.2.0] [org.clojure/clojurescript 1.9.293]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.slf4j/slf4j-api"],"^;","org.slf4j/slf4j-api"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.7.25"],"^;","1.7.25"]]],"^;","[org.slf4j/slf4j-api 1.7.25]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.slf4j/slf4j-api 1.7.25] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"net.cgrand/macrovich"],"^;","net.cgrand/macrovich"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.0"],"^;","0.2.0"]]],"^;","[net.cgrand/macrovich 0.2.0]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[net.cgrand/macrovich 0.2.0] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.jsinterop/jsinterop-annotations"],"^;","com.google.jsinterop/jsinterop-annotations"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.0.0"],"^;","1.0.0"]]],"^;","[com.google.jsinterop/jsinterop-annotations 1.0.0]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.google.jsinterop/jsinterop-annotations 1.0.0] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"args4j"],"^;","args4j"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.0.26"],"^;","2.0.26"]]],"^;","[args4j 2.0.26]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[args4j 2.0.26] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.ta4j/ta4j-core"],"^;","org.ta4j/ta4j-core"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.12"],"^;","0.12"]]],"^;","[org.ta4j/ta4j-core 0.12]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.slf4j/slf4j-api"],"^;","org.slf4j/slf4j-api"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.7.25"],"^;","1.7.25"]]],"^;","[org.slf4j/slf4j-api 1.7.25]"]]],"^;","#{[org.slf4j/slf4j-api 1.7.25]}"]]],"^;","[[org.ta4j/ta4j-core 0.12] #{[org.slf4j/slf4j-api 1.7.25]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/clojurescript"],"^;","org.clojure/clojurescript"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.9.293"],"^;","1.9.293"]]],"^;","[org.clojure/clojurescript 1.9.293]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.javascript/closure-compiler-unshaded"],"^;","com.google.javascript/closure-compiler-unshaded"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"v20160911"],"^;","v20160911"]]],"^;","[com.google.javascript/closure-compiler-unshaded v20160911]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/google-closure-library"],"^;","org.clojure/google-closure-library"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.0-20160609-f42b4a24"],"^;","0.0-20160609-f42b4a24"]]],"^;","[org.clojure/google-closure-library 0.0-20160609-f42b4a24]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/data.json"],"^;","org.clojure/data.json"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.6"],"^;","0.2.6"]]],"^;","[org.clojure/data.json 0.2.6]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/tools.reader"],"^;","org.clojure/tools.reader"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.0.0-beta3"],"^;","1.0.0-beta3"]]],"^;","[org.clojure/tools.reader 1.0.0-beta3]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.mozilla/rhino"],"^;","org.mozilla/rhino"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.7R5"],"^;","1.7R5"]]],"^;","[org.mozilla/rhino 1.7R5]"]]],"^;","#{[com.google.javascript/closure-compiler-unshaded v20160911] [org.clojure/google-closure-library 0.0-20160609-f42b4a24] [org.clojure/data.json 0.2.6] [org.clojure/tools.reader 1.0.0-beta3] [org.mozilla/rhino 1.7R5]}"]]],"^;","[[org.clojure/clojurescript 1.9.293] #{[com.google.javascript/closure-compiler-unshaded v20160911] [org.clojure/google-closure-library 0.0-20160609-f42b4a24] [org.clojure/data.json 0.2.6] [org.clojure/tools.reader 1.0.0-beta3] [org.mozilla/rhino 1.7R5]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/google-closure-library-third-party"],"^;","org.clojure/google-closure-library-third-party"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.0-20160609-f42b4a24"],"^;","0.0-20160609-f42b4a24"]]],"^;","[org.clojure/google-closure-library-third-party 0.0-20160609-f42b4a24]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.clojure/google-closure-library-third-party 0.0-20160609-f42b4a24] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/google-closure-library"],"^;","org.clojure/google-closure-library"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.0-20160609-f42b4a24"],"^;","0.0-20160609-f42b4a24"]]],"^;","[org.clojure/google-closure-library 0.0-20160609-f42b4a24]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/google-closure-library-third-party"],"^;","org.clojure/google-closure-library-third-party"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.0-20160609-f42b4a24"],"^;","0.0-20160609-f42b4a24"]]],"^;","[org.clojure/google-closure-library-third-party 0.0-20160609-f42b4a24]"]]],"^;","#{[org.clojure/google-closure-library-third-party 0.0-20160609-f42b4a24]}"]]],"^;","[[org.clojure/google-closure-library 0.0-20160609-f42b4a24] #{[org.clojure/google-closure-library-third-party 0.0-20160609-f42b4a24]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/clojure"],"^;","org.clojure/clojure"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.10.1-RC1"],"^;","1.10.1-RC1"]]],"^;","[org.clojure/clojure 1.10.1-RC1]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/core.specs.alpha"],"^;","org.clojure/core.specs.alpha"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.44"],"^;","0.2.44"]]],"^;","[org.clojure/core.specs.alpha 0.2.44]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/spec.alpha"],"^;","org.clojure/spec.alpha"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.176"],"^;","0.2.176"]]],"^;","[org.clojure/spec.alpha 0.2.176]"]]],"^;","#{[org.clojure/core.specs.alpha 0.2.44] [org.clojure/spec.alpha 0.2.176]}"]]],"^;","[[org.clojure/clojure 1.10.1-RC1] #{[org.clojure/core.specs.alpha 0.2.44] [org.clojure/spec.alpha 0.2.176]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.code.findbugs/jsr305"],"^;","com.google.code.findbugs/jsr305"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.3.9"],"^;","1.3.9"]]],"^;","[com.google.code.findbugs/jsr305 1.3.9]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.google.code.findbugs/jsr305 1.3.9] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"medley"],"^;","medley"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.2.0"],"^;","1.2.0"]]],"^;","[medley 1.2.0]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[medley 1.2.0] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.code.gson/gson"],"^;","com.google.code.gson/gson"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.2.4"],"^;","2.2.4"]]],"^;","[com.google.code.gson/gson 2.2.4]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.google.code.gson/gson 2.2.4] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/data.json"],"^;","org.clojure/data.json"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.6"],"^;","0.2.6"]]],"^;","[org.clojure/data.json 0.2.6]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.clojure/data.json 0.2.6] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/tools.reader"],"^;","org.clojure/tools.reader"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.0.0-beta3"],"^;","1.0.0-beta3"]]],"^;","[org.clojure/tools.reader 1.0.0-beta3]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.clojure/tools.reader 1.0.0-beta3] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/data.csv"],"^;","org.clojure/data.csv"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.1.4"],"^;","0.1.4"]]],"^;","[org.clojure/data.csv 0.1.4]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.clojure/data.csv 0.1.4] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"cheshire"],"^;","cheshire"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"5.8.1"],"^;","5.8.1"]]],"^;","[cheshire 5.8.1]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-set"],"#{"],"^5",["^3",["^ ","^4","clj-set"],"}"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"tigris"],"^;","tigris"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.1.1"],"^;","0.1.1"]]],"^;","[tigris 0.1.1]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.fasterxml.jackson.core/jackson-core"],"^;","com.fasterxml.jackson.core/jackson-core"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.9.6"],"^;","2.9.6"]]],"^;","[com.fasterxml.jackson.core/jackson-core 2.9.6]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.fasterxml.jackson.dataformat/jackson-dataformat-cbor"],"^;","com.fasterxml.jackson.dataformat/jackson-dataformat-cbor"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.9.6"],"^;","2.9.6"]]],"^;","[com.fasterxml.jackson.dataformat/jackson-dataformat-cbor 2.9.6]"],["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.fasterxml.jackson.dataformat/jackson-dataformat-smile"],"^;","com.fasterxml.jackson.dataformat/jackson-dataformat-smile"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.9.6"],"^;","2.9.6"]]],"^;","[com.fasterxml.jackson.dataformat/jackson-dataformat-smile 2.9.6]"]]],"^;","#{[tigris 0.1.1] [com.fasterxml.jackson.core/jackson-core 2.9.6] [com.fasterxml.jackson.dataformat/jackson-dataformat-cbor 2.9.6] [com.fasterxml.jackson.dataformat/jackson-dataformat-smile 2.9.6]}"]]],"^;","[[cheshire 5.8.1] #{[tigris 0.1.1] [com.fasterxml.jackson.core/jackson-core 2.9.6] [com.fasterxml.jackson.dataformat/jackson-dataformat-cbor 2.9.6] [com.fasterxml.jackson.dataformat/jackson-dataformat-smile 2.9.6]}]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.mozilla/rhino"],"^;","org.mozilla/rhino"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"1.7R5"],"^;","1.7R5"]]],"^;","[org.mozilla/rhino 1.7R5]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.mozilla/rhino 1.7R5] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.fasterxml.jackson.core/jackson-core"],"^;","com.fasterxml.jackson.core/jackson-core"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.9.6"],"^;","2.9.6"]]],"^;","[com.fasterxml.jackson.core/jackson-core 2.9.6]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.fasterxml.jackson.core/jackson-core 2.9.6] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.fasterxml.jackson.dataformat/jackson-dataformat-cbor"],"^;","com.fasterxml.jackson.dataformat/jackson-dataformat-cbor"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.9.6"],"^;","2.9.6"]]],"^;","[com.fasterxml.jackson.dataformat/jackson-dataformat-cbor 2.9.6]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.fasterxml.jackson.dataformat/jackson-dataformat-cbor 2.9.6] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/core.specs.alpha"],"^;","org.clojure/core.specs.alpha"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.44"],"^;","0.2.44"]]],"^;","[org.clojure/core.specs.alpha 0.2.44]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.clojure/core.specs.alpha 0.2.44] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.guava/guava"],"^;","com.google.guava/guava"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"19.0"],"^;","19.0"]]],"^;","[com.google.guava/guava 19.0]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.google.guava/guava 19.0] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"org.clojure/spec.alpha"],"^;","org.clojure/spec.alpha"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"0.2.176"],"^;","0.2.176"]]],"^;","[org.clojure/spec.alpha 0.2.176]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[org.clojure/spec.alpha 0.2.176] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.fasterxml.jackson.dataformat/jackson-dataformat-smile"],"^;","com.fasterxml.jackson.dataformat/jackson-dataformat-smile"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.9.6"],"^;","2.9.6"]]],"^;","[com.fasterxml.jackson.dataformat/jackson-dataformat-smile 2.9.6]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.fasterxml.jackson.dataformat/jackson-dataformat-smile 2.9.6] nil]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^1","^2",["^3",["^ ","^4","clj-vector"],"["],"^5",["^3",["^ ","^4","clj-vector"],"]"],"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-symbol"],"com.google.protobuf/protobuf-java"],"^;","com.google.protobuf/protobuf-java"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-string"],"2.5.0"],"^;","2.5.0"]]],"^;","[com.google.protobuf/protobuf-java 2.5.0]"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-nil"],"nil"],"^;","nil"]]],"^;","[[com.google.protobuf/protobuf-java 2.5.0] nil]"]]],"^;","{[com.google.javascript/closure-compiler-externs \"v20160911\"] nil, [com.google.javascript/closure-compiler-unshaded \"v20160911\"] #{[com.google.javascript/closure-compiler-externs \"v20160911\"] [com.google.jsinterop/jsinterop-annotations \"1.0.0\"] [args4j \"2.0.26\"] [com.google.code.findbugs/jsr305 \"1.3.9\"] [com.google.code.gson/gson \"2.2.4\"] [com.google.guava/guava \"19.0\"] [com.google.protobuf/protobuf-java \"2.5.0\"]}, [trateg \"0.1.1-SNAPSHOT\"] #{[net.cgrand/xforms \"0.18.2\"] [org.ta4j/ta4j-core \"0.12\"] [org.clojure/clojure \"1.10.1-RC1\"] [medley \"1.2.0\"] [org.clojure/data.csv \"0.1.4\"] [cheshire \"5.8.1\"]}, [tigris \"0.1.1\"] nil, [net.cgrand/xforms \"0.18.2\"] #{[net.cgrand/macrovich \"0.2.0\"] [org.clojure/clojurescript \"1.9.293\"]}, [org.slf4j/slf4j-api \"1.7.25\"] nil, [net.cgrand/macrovich \"0.2.0\"] nil, [com.google.jsinterop/jsinterop-annotations \"1.0.0\"] nil, [args4j \"2.0.26\"] nil, [org.ta4j/ta4j-core \"0.12\"] #{[org.slf4j/slf4j-api \"1.7.25\"]}, [org.clojure/clojurescript \"1.9.293\"] #{[com.google.javascript/closure-compiler-unshaded \"v20160911\"] [org.clojure/google-closure-library \"0.0-20160609-f42b4a24\"] [org.clojure/data.json \"0.2.6\"] [org.clojure/tools.reader \"1.0.0-beta3\"] [org.mozilla/rhino \"1.7R5\"]}, [org.clojure/google-closure-library-third-party \"0.0-20160609-f42b4a24\"] nil, [org.clojure/google-closure-library \"0.0-20160609-f42b4a24\"] #{[org.clojure/google-closure-library-third-party \"0.0-20160609-f42b4a24\"]}, [org.clojure/clojure \"1.10.1-RC1\"] #{[org.clojure/core.specs.alpha \"0.2.44\"] [org.clojure/spec.alpha \"0.2.176\"]}, [com.google.code.findbugs/jsr305 \"1.3.9\"] nil, [medley \"1.2.0\"] nil, [com.google.code.gson/gson \"2.2.4\"] nil, [org.clojure/data.json \"0.2.6\"] nil, [org.clojure/tools.reader \"1.0.0-beta3\"] nil, [org.clojure/data.csv \"0.1.4\"] nil, [cheshire \"5.8.1\"] #{[tigris \"0.1.1\"] [com.fasterxml.jackson.core/jackson-core \"2.9.6\"] [com.fasterxml.jackson.dataformat/jackson-dataformat-cbor \"2.9.6\"] [com.fasterxml.jackson.dataformat/jackson-dataformat-smile \"2.9.6\"]}, [org.mozilla/rhino \"1.7R5\"] nil, [com.fasterxml.jackson.core/jackson-core \"2.9.6\"] nil, [com.fasterxml.jackson.dataformat/jackson-dataformat-cbor \"2.9.6\"] nil, [org.clojure/core.specs.alpha \"0.2.44\"] nil, [com.google.guava/guava \"19.0\"] nil, [org.clojure/spec.alpha \"0.2.176\"] nil, [com.fasterxml.jackson.dataformat/jackson-dataformat-smile \"2.9.6\"] nil, [com.google.protobuf/protobuf-java \"2.5.0\"] nil}"]
+;; <=
+
+;; @@ [clj]
+(ns demo
+  (:require 
+   [clojure.pprint :refer :all]
+          ;  [clojure.repl :refer :all]
+            [trateg.spx :as data]
+            [medley.core :as m]
+            [trateg.core :refer :all]
+            [trateg.indicator :as ind]
+            [trateg.ta4j :as ta4j]
+   :reload-all))
+;; @@
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+; show bar data
+(first data/spx-bars)
+;; @@
+;; =>
+;;; ["^ ","~:type","~:list-like","~:open",["~:span",["^ ","~:class","clj-map"],"{"],"~:close",["^3",["^ ","^4","clj-map"],"}"],"~:separator",["^3",", "],"~:items",["~#list",[["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","~:html","~:content",["^3",["^ ","^4","clj-keyword"],":end-zdt"],"~:value",":end-zdt"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-unkown"],"#object[java.time.ZonedDateTime 0x5dbf6b81 1999-03-29T16:00-05:00[America/New_York]]"],"^;","#object[java.time.ZonedDateTime 0x5dbf6b81 1999-03-29T16:00-05:00[America/New_York]]"]]],"^;","[:end-zdt #object[java.time.ZonedDateTime 0x5dbf6b81 1999-03-29T16:00-05:00[America/New_York]]]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":open"],"^;",":open"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1282.8"],"^;","1282.8"]]],"^;","[:open 1282.8]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":high"],"^;",":high"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1311.8"],"^;","1311.8"]]],"^;","[:high 1311.8]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":low"],"^;",":low"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1282.8"],"^;","1282.8"]]],"^;","[:low 1282.8]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":close"],"^;",":close"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1310.17"],"^;","1310.17"]]],"^;","[:close 1310.17]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":volume"],"^;",":volume"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"747627.0"],"^;","747627.0"]]],"^;","[:volume 747627.0]"]]],"^;","{:end-zdt #object[java.time.ZonedDateTime 0x5dbf6b81 \"1999-03-29T16:00-05:00[America/New_York]\"], :open 1282.8, :high 1311.8, :low 1282.8, :close 1310.17, :volume 747627.0}"]
+;; <=
+
+;; @@ [clj]
+(def cached-rsi (memoize ind/rsi))
+(def cached-atr (memoize ind/atr))
+
+;;We will augment our OHLC data with an RSI and ATR. Note that we use the same
+;;RSI and ATR periods for all strategies in this file, but differen parameters
+;;could easily be explored
+(defn mkbars [bar-maps {:keys [rsi-period atr-period]}]
+  (let [bar-cols   (row-maps->column-map bar-maps)
+        indicators {:atr (cached-atr atr-period
+                                     (:high bar-cols)
+                                     (:low bar-cols)
+                                     (:close bar-cols))
+                    :rsi (cached-rsi rsi-period (:close bar-cols))}]
+    (doall (column-map->row-maps (merge bar-cols indicators)))))
+
+(def BARS (mkbars trateg.spx/spx-bars {:rsi-period 14 :atr-period 20}))
+;; @@
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-var"],"#'demo/BARS"],"~:value","#'demo/BARS"]
+;; <=
+
+;; @@ [clj]
+; show bars that have been aumented with :rs and :atr
+(nth BARS 10)
+;; @@
+;; =>
+;;; ["^ ","~:type","~:list-like","~:open",["~:span",["^ ","~:class","clj-map"],"{"],"~:close",["^3",["^ ","^4","clj-map"],"}"],"~:separator",["^3",", "],"~:items",["~#list",[["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","~:html","~:content",["^3",["^ ","^4","clj-keyword"],":rsi"],"~:value",":rsi"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"70.0100124130674"],"^;","70.0100124130674"]]],"^;","[:rsi 70.0100124130674]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":open"],"^;",":open"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1358.64"],"^;","1358.64"]]],"^;","[:open 1358.64]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":close"],"^;",":close"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1349.82"],"^;","1349.82"]]],"^;","[:close 1349.82]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":volume"],"^;",":volume"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"810385.0"],"^;","810385.0"]]],"^;","[:volume 810385.0]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":high"],"^;",":high"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1361.92"],"^;","1361.92"]]],"^;","[:high 1361.92]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":end-zdt"],"^;",":end-zdt"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-unkown"],"#object[java.time.ZonedDateTime 0x6b267642 1999-04-13T16:00-04:00[America/New_York]]"],"^;","#object[java.time.ZonedDateTime 0x6b267642 1999-04-13T16:00-04:00[America/New_York]]"]]],"^;","[:end-zdt #object[java.time.ZonedDateTime 0x6b267642 1999-04-13T16:00-04:00[America/New_York]]]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":low"],"^;",":low"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"1344.05"],"^;","1344.05"]]],"^;","[:low 1344.05]"],["^ ","^0","^1","^2",null,"^5",null,"^6",["^3"," "],"^7",["^8",[["^ ","^0","^9","^:",["^3",["^ ","^4","clj-keyword"],":atr"],"^;",":atr"],["^ ","^0","^9","^:",["^3",["^ ","^4","clj-double"],"25.140917313688515"],"^;","25.140917313688515"]]],"^;","[:atr 25.140917313688515]"]]],"^;","{:rsi 70.0100124130674, :open 1358.64, :close 1349.82, :volume 810385.0, :high 1361.92, :end-zdt #object[java.time.ZonedDateTime 0x6b267642 \"1999-04-13T16:00-04:00[America/New_York]\"], :low 1344.05, :atr 25.140917313688515}"]
+;; <=
+
+;; @@ [clj]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Static holding period strategy;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;First let's try a simple long/short RSI strategy that exits after n days
+
+(defn rsi-hold-for-strat [n]
+  (fn [ctx]
+    (-> ctx
+        (cross-trigger :under :rsi 30 :enter :long)
+        (cross-trigger :over :rsi 70 :enter :short)
+        (hold-for-exit n)
+        enforce-single-position
+        enforce-no-entry-on-exit-bar
+        check-exits
+        record-exit-orders
+        execute-pending)))
+
+;;now lets print some stats about all the results
+(def results1 (into (sorted-map)
+                    (for [n (concat (range 1 10) (range 10 31 5))]
+                      [n (run-strat BARS (rsi-hold-for-strat n))])))
+
+;;Now let's check print a bunch of stats on these results
+(do (println "Results for holding-period exits:")
+    (->> results1
+         (map (fn [[n result]]
+                (-> (gauntlet result)
+                    (assoc :n n))))
+         (print-result-table :n)))
+;; @@
+;; ->
+;;; Results for holding-period exits:
+;;; 
+;;;   :n   :total-return   :mean-return   :sd-return   :win-rate   :trade-ct   :sharpe   :max-drawdown  
+;;; ----- --------------- -------------- ------------ ----------- ----------- --------- ----------------
+;;;    1           1.331          1.002        0.011       0.569         144    28.230           0.052  
+;;;    2           1.382          1.003        0.018       0.551         138    20.574           0.110  
+;;;    3           1.054          1.001        0.020       0.488         121     2.157           0.221  
+;;;    4           1.080          1.001        0.021       0.450         111     3.399           0.303  
+;;;    5           1.518          1.004        0.025       0.546         108    20.081           0.182  
+;;;    6           1.242          1.002        0.028       0.538         104     8.322           0.234  
+;;;    7           1.315          1.003        0.028       0.500         100    10.923           0.177  
+;;;    8           1.030          1.001        0.027       0.484          93     0.735           0.342  
+;;;    9           1.150          1.002        0.028       0.467          90     5.032           0.243  
+;;;   10           0.903          0.999        0.031       0.430          86    -3.458           0.360  
+;;;   15           1.302          1.004        0.033       0.468          77     8.977           0.255  
+;;;   20           1.447          1.007        0.043       0.500          66    10.086           0.253  
+;;;   25           1.209          1.004        0.043       0.415          65     4.684           0.272  
+;;;   30           1.112          1.003        0.049       0.483          60     2.081           0.327  
+;; <-
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+;;let's check out a chart of the performance for the 20 day holding period
+(performance-chart (get results1 20))
+;; @@
+
+;; @@ [clj]
+;;we can also see trades on a trade-chart. Longs are blue shorts are red, the
+;;darker shade is a winning trade, while the ligher shade is a loser.
+(trade-chart (get results1 20) :rsi)
+
+;; @@
+
+;; @@ [clj]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;ATR based stops;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;next we'll define a strategy that sets an initial stop loss and profit target
+;;that is a multiple of the Average true range at the bar of entry
+
+(defn rsi-atr-exit-strat [stop-mult tp-mult]
+  (fn [ctx]
+    (-> ctx
+        (cross-trigger :under :rsi 30 :enter :long)
+        (cross-trigger :over :rsi 70 :enter :short)
+        
+        (initial-stop
+         (fn [ctx]
+           (let [{:keys [atr]} (:current-bar ctx)]
+             (when-let [{:keys [entry-price side]} (:pending-entry ctx)]
+               (side-add side entry-price  (- (* stop-mult atr)))))))
+        (initial-tp
+         (fn [ctx]
+           (let [{:keys [atr]} (:current-bar ctx)]
+             (when-let [{:keys [entry-price side]} (:pending-entry ctx)]
+               (side-add side entry-price  (* tp-mult atr))))))
+        
+        enforce-single-position
+        enforce-no-entry-on-exit-bar
+        check-exits
+        record-exit-orders
+        execute-pending)))
+
+
+(def results2 (into (sorted-map)
+                    (for [stop-mult (range 1 5)
+                          tp-mult (range 1 5)]
+                      [[stop-mult tp-mult]
+                       (run-strat BARS (rsi-atr-exit-strat stop-mult tp-mult))])))
+
+(do (println "Results for ATR multiple stops:")
+  (->> results2
+       (map (fn [[[stop-mult tp-mult] result]]
+              (-> (gauntlet result)
+                  (assoc :exits
+                         [stop-mult tp-mult]))))
+       (print-result-table :exits)))
+
+
+;; @@
+;; ->
+;;; Results for ATR multiple stops:
+;;; 
+;;;   :exits   :total-return   :mean-return   :sd-return   :win-rate   :trade-ct   :sharpe   :max-drawdown  
+;;; --------- --------------- -------------- ------------ ----------- ----------- --------- ----------------
+;;;    [1 1]           1.225          1.002        0.015       0.573         117    14.757           0.139  
+;;;    [1 2]           0.943          1.000        0.021       0.303         109    -3.211           0.281  
+;;;    [1 3]           0.971          1.000        0.027       0.213         108    -1.478           0.281  
+;;;    [1 4]           0.951          1.000        0.030       0.178         107    -1.940           0.265  
+;;;    [2 1]           1.105          1.001        0.021       0.686         105     4.632           0.150  
+;;;    [2 2]           0.833          0.998        0.029       0.478          92    -6.076           0.365  
+;;;    [2 3]           0.847          0.999        0.035       0.378          90    -4.637           0.443  
+;;;    [2 4]           0.849          0.999        0.039       0.326          89    -4.086           0.531  
+;;;    [3 1]           0.911          0.999        0.027       0.737          95    -3.632           0.259  
+;;;    [3 2]           0.903          0.999        0.037       0.588          80    -2.891           0.296  
+;;;    [3 3]           0.902          1.000        0.046       0.452          73    -2.359           0.366  
+;;;    [3 4]           0.954          1.001        0.053       0.394          71    -1.050           0.314  
+;;;    [4 1]           1.174          1.002        0.027       0.791          91     6.137           0.223  
+;;;    [4 2]           0.920          1.000        0.043       0.640          75    -2.075           0.344  
+;;;    [4 3]           0.988          1.001        0.053       0.536          69    -0.404           0.392  
+;;;    [4 4]           1.237          1.005        0.061       0.500          68     3.700           0.317  
+;; <-
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Trailing stop;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;finally we will begin working on a trailing stop
+;;it will be somewhat simplistic, as it currently will only use a
+;;nominal distance from the entry, which will move up along with price
+
+(defn trail-stop [ctx distance]
+  (let [{:keys [current-bar position pending-entry]} ctx
+        {:keys [high low]}                           current-bar
+        {:keys [entry-price side stop]}              position
+        pos-key                                      (cond
+                                                       position      :position
+                                                       pending-entry :pending-entry
+                                                       :else         nil)]
+
+    ;;long only first
+    (cond-> ctx
+      (and pos-key (= side :long)
+           (or (nil? stop)
+               (> (- high distance) stop)))
+      (assoc-in [pos-key :stop] (- high distance))
+
+      (and pos-key (= side :short)
+           (or (nil? stop)
+               (< (+ low distance) stop)))
+      (assoc-in [pos-key :stop] (+ low distance)))))
+
+(defn rsi-trailing-stop-strat [distance]
+  (fn [ctx]
+    (-> ctx
+        (cross-trigger :under :rsi 30 :enter :long)
+        (cross-trigger :over :rsi 70 :enter :short)
+        (trail-stop distance)
+        enforce-single-position
+        enforce-no-entry-on-exit-bar
+        check-exits
+        record-exit-orders
+        execute-pending)))
+
+
+;;now lets print some stats about all the results
+(def results3 (into (sorted-map)
+                    (for [n (range 5 105 5)]
+                      [n (run-strat BARS (rsi-trailing-stop-strat n))])))
+
+;;Now let's check print a bunch of stats on these results
+(do (println "Results for trailing stops")
+    (->> results3
+         (map (fn [[n result]]
+                (-> (gauntlet result)
+                    (assoc :stop n))))
+         (print-result-table :stop)))
+;; @@
+;; ->
+;;; Results for trailing stops
+;;; 
+;;;   :stop   :total-return   :mean-return   :sd-return   :win-rate   :trade-ct   :sharpe   :max-drawdown  
+;;; -------- --------------- -------------- ------------ ----------- ----------- --------- ----------------
+;;;       5           1.922          1.005        0.009       0.681         144   101.728           0.048  
+;;;      10           1.361          1.002        0.009       0.540         139    39.616           0.044  
+;;;      15           1.049          1.000        0.009       0.445         128     4.317           0.053  
+;;;      20           0.983          1.000        0.012       0.413         121    -2.280           0.064  
+;;;      25           0.806          0.998        0.013       0.377         114   -15.187           0.111  
+;;;      30           1.013          1.000        0.021       0.369         103     0.149           0.136  
+;;;      35           0.881          0.999        0.023       0.313          96    -5.505           0.243  
+;;;      40           0.784          0.998        0.023       0.333          90    -9.616           0.353  
+;;;      45           0.897          0.999        0.033       0.390          82    -3.486           0.306  
+;;;      50           0.857          0.999        0.037       0.333          78    -4.153           0.305  
+;;;      55           1.113          1.003        0.053       0.365          74     1.960           0.266  
+;;;      60           1.122          1.003        0.055       0.366          71     2.019           0.294  
+;;;      65           1.187          1.004        0.065       0.357          70     2.717           0.367  
+;;;      70           1.348          1.007        0.071       0.359          64     4.744           0.364  
+;;;      75           1.032          1.003        0.072       0.344          61     0.298           0.386  
+;;;      80           1.066          1.004        0.081       0.404          57     0.687           0.369  
+;;;      85           0.860          1.000        0.082       0.345          55    -1.838           0.452  
+;;;      90           0.665          0.995        0.073       0.315          54    -4.694           0.565  
+;;;      95           0.493          0.989        0.073       0.250          52    -7.110           0.666  
+;;;     100           0.548          0.991        0.079       0.265          49    -5.843           0.630  
+;; <-
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+;;let's check out a chart of the performance for the 20 day holding period
+(performance-chart (get results3 20))
+;; @@
+;; ->
+;;; 
+;; <-
+;; =>
+;;; ["^ ","~:type","html","~:value",["~:span"]]
+;; <=
+
+;; @@ [clj]
+(trade-chart (get results3 100) :rsi)
+;; @@
+;; ->
+;;; 
+;; <-
+;; =>
+;;; ["^ ","~:type","html","~:value",["~:span"]]
+;; <=

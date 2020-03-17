@@ -296,25 +296,9 @@
 (json-gen/add-encoder java.time.ZonedDateTime
                       (fn [zdt gen] (.writeNumber gen (-> zdt .toInstant .toEpochMilli str))))
 
-(defn browse-file [f]
-  (let [open-script (if (-> "os.name" System/getProperty #{"Linux"})
-                      "xdg-open"
-                      "open")]
-    (-> (shell/sh open-script (str f)) :err empty?)))
-
 (defn view-highchart [opts]
-  (let [html-base (slurp (io/resource "highcharts/base.html"))
-        temp-dir  (java.io.File. "tmp-charts")
-        _         (when-not (.exists temp-dir) (.mkdir temp-dir))
-        temp-file (doto (java.io.File/createTempFile
-                         "highcharts"
-                         ".html" temp-dir)
-                    .deleteOnExit)]
-    (->> opts
-         json/encode
-         (format html-base)
-         (spit temp-file))
-    (browse-file temp-file)))
+ ^:R [:highchart opts])
+  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Tools and charts to analyze result sets;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

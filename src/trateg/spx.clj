@@ -1,4 +1,4 @@
-(ns data.spx
+(ns trateg.spx
   (:require [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str])
@@ -9,7 +9,7 @@
 
 (def EST (ZoneId/of "America/New_York"))
 
-(def csv (csv/read-csv (io/reader (io/resource "spx.csv"))))
+(def csv (csv/read-csv (io/reader (io/resource "trateg/spx.csv"))))
 
 (def header (->> csv first (map (comp keyword str/lower-case))))
 
