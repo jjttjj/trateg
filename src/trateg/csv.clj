@@ -1,4 +1,4 @@
-(ns trateg.spx
+(ns trateg.csv
   (:require [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str])
@@ -9,11 +9,19 @@
 
 (def EST (ZoneId/of "America/New_York"))
 
-(def csv (csv/read-csv (io/reader (io/resource "trateg/spx.csv"))))
 
-(def header (->> csv first (map (comp keyword str/lower-case))))
+(defn load-csv [file]
+  (csv/read-csv (io/reader (io/resource file))))
 
-(def spx-bars
+;(def csv (csv/read-csv (io/reader (io/resource "trateg/spx.csv"))))
+
+(defn header-csv [file] 
+  (->> (load-csv file) 
+       first 
+       (map (comp keyword str/lower-case))))
+
+(defn load-csv-bars [file]
+  (let [csv (load-csv file) ]
   (for [[date time open high low close volume oi] (rest csv)]
     {:end-zdt (ZonedDateTime/of (LocalDate/parse date date-fmt)
                                 (LocalTime/parse time)
@@ -22,6 +30,6 @@
      :high    (Double/parseDouble high)
      :low     (Double/parseDouble low)
      :close   (Double/parseDouble close)
-     :volume  (Double/parseDouble volume)}))
+     :volume  (Double/parseDouble volume)})))
 
 

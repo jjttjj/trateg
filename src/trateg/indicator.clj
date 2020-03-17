@@ -103,5 +103,99 @@
              ))
          g l)))
 
+;; awb99
+
+  (defn prct-change-
+    "calculates percentage change of prior/current"
+    [prior current]
+    (do
+      ;(println "current" current "prior" prior)
+      (if (or (nil? prior) (= 0 prior)) nil
+          (* (/ (- current prior) prior) 100.0))))                    ; absolute change
+
+
+(defn ago
+  "returns a timeseries of values n ago.
+   first n items are nil."
+  [n ts]
+  (concat
+   (repeat n nil)
+   (drop-last n ts)))
+
+(defn change-n
+  [n ts]
+  "calculates changes in timeseries (relative to n ago)"
+  (into []
+        (map #(prct-change- %1 %2)
+             (ago n ts); prior
+             ts        ; current                                    
+             )))
+
+
+
+
+(comment
+  
+  (def concat-and-reverse (comp (partial apply str) reverse str))
+  (concat-and-reverse "hello" "clojuredocs" "!")
+  
+  (def xf (comp (filter odd?) (take 10)))
+  (sequence xf (range 1 50))
+  ;; => (1 3 5 7 9)
+  
+  (def countif (comp count filter))
+  (countif even? [2 3 1 5 4])
+  
+  (range 16)
+  
+  (defn p [& a]
+    (println "+" a)
+    (apply + a)
+  ;(+ a b)
+    )
+
+  
+  (defn a [b c] 
+    (println "a " b c)
+    b)
+  
+  ;; sum of last 3 items
+  (sequence (x/window 4 p a) (range 16))  
+
+  (sequence (x/window 3 + -) (range 16))
+  
+
+  (defn chg [a]
+    (println "a: " a)
+  ;  (x/reduce +)
+    ;(first a)
+    a
+    '(4 5)
+    )
+
+  (sequence (x/partition 4 chg) (range 16))
+  
+  (sequence
+   (let [_n   (atom nil)
+         _n-1 (atom nil)]
+     (map (fn [x]
+            (let [n   @_n
+                  n-1 @_n-1]
+              (reset! _n-1 n)
+              (reset! _n x)
+              [(when n (/ x n))
+               (when n-1 (/ x n-1))]))))
+   (range 1 16))
+  
+                        
+  (ago 1 (range 10))
+  (change-n 1 (range 1 11))
+  
+
+  (drop 2 (range 10))
+  
+  )
+
+
 
 

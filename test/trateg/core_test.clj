@@ -1,16 +1,20 @@
 (ns trateg.core-test
   (:require [clojure.test :refer :all]
-            [data.spx :as data]
+            [trateg.csv :refer [load-csv-bars]]
             [trateg.core :refer :all]
             [trateg.indicator :as ind]
             [trateg.ta4j :as ta4j :refer [ind ind-values analysis rule crit-values]])
   (:import [org.ta4j.core Order Order$OrderType]))
 
+
+(def spx-bars  (load-csv-bars "trateg/spx.csv"))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;data;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def series4j (ta4j/->series data/spx-bars))
+(def series4j (ta4j/->series spx-bars))
 
 (def strat4j
   (let [rsi (ind :RSI (ind :helpers/ClosePrice series4j) 14)]
@@ -28,7 +32,7 @@
     (doall (column-map->row-maps (merge bar-cols indicators)))))
 
 
-(def BARS (mkbars data/spx-bars {:rsi-period 14 :atr-period 20}))
+(def BARS (mkbars spx-bars {:rsi-period 14 :atr-period 20}))
 
 (def STRAT #(-> %
                 (cross-trigger :under :rsi 30 :enter :long)
@@ -47,29 +51,29 @@
 (deftest test-atr
   (is (all-fuzzy= (ind-values (ind :ATR series4j 14))
                   (ind/atr 14
-                           (map :high data/spx-bars)
-                           (map :low data/spx-bars)
-                           (map :close data/spx-bars)))))
+                           (map :high spx-bars)
+                           (map :low spx-bars)
+                           (map :close spx-bars)))))
 
 (deftest test-stochastic
   (is (all-fuzzy=
        (ind-values (ind :StochasticOscillatorK series4j 14))
-       (ind/stochastic 14 (map (juxt :high :low :close) data/spx-bars)))))
+       (ind/stochastic 14 (map (juxt :high :low :close) spx-bars)))))
 
 (deftest test-sma
   (is (all-fuzzy= 
        (ind-values (ind :SMA (ind :helpers/ClosePrice series4j) 14))
-       (ind/sma 14 (map :close data/spx-bars)))))
+       (ind/sma 14 (map :close spx-bars)))))
 
 (deftest test-ema
   (is (all-fuzzy= 
        (ind-values (ind :EMA (ind :helpers/ClosePrice series4j) 14))
-       (ind/ema 14 (map :close data/spx-bars)))))
+       (ind/ema 14 (map :close spx-bars)))))
 
 (deftest test-rsi
   (is (all-fuzzy= 
        (ind-values (ind :RSI (ind :helpers/ClosePrice series4j) 14))
-       (ind/rsi 14 (map :close data/spx-bars)))))
+       (ind/rsi 14 (map :close spx-bars)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;crit tests;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -88,13 +92,13 @@
               (count trades1))))
 
 (deftest test-max-drawdown
-  (is (fuzzy= (max-drawdown-over-bars data/spx-bars trades1)
+  (is (fuzzy= (max-drawdown-over-bars spx-bars trades1)
               (crit-values :MaximumDrawdown series4j trades4j))))
 
 (deftest test-cash-flow
   (is
    (all-fuzzy=
-    (cash-flow data/spx-bars trades1)
+    (cash-flow spx-bars trades1)
     (ind-values (analysis :CashFlow series4j trades4j)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -112,3 +116,13 @@
                           (= (:exit-index mine) (:exit-index theirs))))
                    trades1
                    (ta4j/record->clj series4j trades4j)))))
+
+
+
+(deftest test-ago
+  (is (= (ind/ago 1 [1 2 3 4 5])
+              [nil 1 2 3 4])))
+
+(deftest test-prct-change
+  (is (= (ind/change-n 2 [100 100 110 110 110])
+         [nil nil 10.0 10.0 0.0])))
