@@ -23,8 +23,7 @@
   [spec]
   (prewalk
    (fn [x]
-     ; [:keyword a b c] we want to replace only when we have a vector whose first element is a keyword
-     (if (= java.time.ZonedDateTime (type x))  ; awb99 changed coll? to vector? because we dont want to operate on maps
+      (if (= java.time.ZonedDateTime (type x))
        (zoned-time-to-epoch-milli x)
        x))
    spec))
