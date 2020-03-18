@@ -1,6 +1,6 @@
 (ns trateg.rank-test
   (:require [clojure.test :refer :all]
-            [trateg.rank :refer [rank]]
+            [trateg.rank:refer [rank]]
             ))
 
 (def data-
