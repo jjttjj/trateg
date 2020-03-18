@@ -1,8 +1,10 @@
 (ns trateg.chart
-  (:require [cheshire.core :as json]
-            [cheshire.generate :as json-gen]
-            [trateg.core :refer :all]
-            [medley.core :as m]))
+  (:require 
+   [clojure.walk :refer [prewalk]]
+   [cheshire.core :as json]
+   [cheshire.generate :as json-gen]
+   [trateg.core :refer :all]
+   [medley.core :as m]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;visualization;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -12,9 +14,28 @@
 (json-gen/add-encoder java.time.ZonedDateTime
                       (fn [zdt gen] (.writeNumber gen (-> zdt .toInstant .toEpochMilli str))))
 
+(defn zoned-time-to-epoch-milli [zdt]
+  (-> zdt .toInstant .toEpochMilli))
 
-(defn view-highchart [opts]
-  ^:R [:highchart opts])
+
+(defn replace-ZonedDateTime 
+  "replaces type ZonedDateTime to epoch-with-milliseconds"
+  [spec]
+  (prewalk
+   (fn [x]
+     ; [:keyword a b c] we want to replace only when we have a vector whose first element is a keyword
+     (if (= java.time.ZonedDateTime (type x))  ; awb99 changed coll? to vector? because we dont want to operate on maps
+       (zoned-time-to-epoch-milli x)
+       x))
+   spec))
+
+
+(defn view-highchart [specs]
+  (let [;spec (->> specs json/encode)
+        spec-safe (replace-ZonedDateTime specs)
+        ;_ (println "safe spec: " spec-safe)
+        ]
+    ^:R [:highchart spec-safe]))
 
 
 (defn trade-chart [{:keys [trades bars stops tps] :as results} indicator-key]
@@ -79,6 +100,8 @@
                :data         (->> bars (map (juxt :end-zdt indicator-key)))
                :yAxis        1
                :dataGrouping {:enabled false}}]}))
+
+
 
 (defn performance-chart [{:keys [trades bars] :as result}]
   (let [bars       bars
