@@ -1,9 +1,12 @@
-(ns trateg.core-test
-  (:require [clojure.test :refer :all]
-            [trateg.csv :refer [load-csv-bars]]
-            [trateg.core :refer :all]
-            [trateg.indicator :as ind]
-            [trateg.ta4j :as ta4j :refer [ind ind-values analysis rule crit-values]])
+(ns ta.core-test
+  (:require 
+   [clojure.test :refer :all]
+   [ta.data.csv :refer [load-csv-bars]]
+   [ta.series.indicator :as ind]
+   [ta.series.ta4j :as ta4j :refer [ind ind-values analysis rule crit-values]]
+   [trateg.core :refer :all]
+   [ta.model.stats :refer :all]
+   )
   (:import [org.ta4j.core Order Order$OrderType]))
 
 

@@ -1,4 +1,4 @@
-(ns trateg.trade
+(ns ta.model.trade
   " backtest on portfolio level
 
      predicate-exit [model position]

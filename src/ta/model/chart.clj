@@ -1,18 +1,19 @@
-(ns trateg.chart
+(ns ta.model.chart
   (:require 
    [clojure.walk :refer [prewalk]]
-   [cheshire.core :as json]
-   [cheshire.generate :as json-gen]
+   ;[cheshire.core :as json]
+   ;[cheshire.generate :as json-gen]
    [trateg.core :refer :all]
-   [medley.core :as m]))
+   ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;visualization;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;highcharts uses epoch millis for times
-(json-gen/add-encoder java.time.ZonedDateTime
-                      (fn [zdt gen] (.writeNumber gen (-> zdt .toInstant .toEpochMilli str))))
+;(json-gen/add-encoder java.time.ZonedDateTime
+;                      (fn [zdt gen] (.writeNumber gen (-> zdt .toInstant .toEpochMilli str))))
+
 
 (defn zoned-time-to-epoch-milli [zdt]
   (-> zdt .toInstant .toEpochMilli))

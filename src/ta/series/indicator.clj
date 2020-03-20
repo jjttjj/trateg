@@ -1,4 +1,4 @@
-(ns trateg.indicator
+(ns ta.series.indicator
   (:require [net.cgrand.xforms :as x]
             [net.cgrand.xforms.rfs :as rfs]))
 

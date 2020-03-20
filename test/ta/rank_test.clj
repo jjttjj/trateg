@@ -1,7 +1,7 @@
-(ns trateg.rank-test
+(ns ta.rank-test
   (:require 
    [clojure.test :refer :all]
-   [trateg.rank :refer [rank]]))
+   [ta.model.rank :refer [rank]]))
 
 (def data-
   (atom {:symbols

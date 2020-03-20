@@ -1,6 +1,6 @@
-(ns trateg.rank
+(ns ta.model.rank
   (:require 
-   [trateg.trade :refer [get-ts set-ts map-symbols]]))
+   [ta.model.trade :refer [get-ts set-ts map-symbols]]))
 
 (defn rank-input [model field-in index]
   ;(println "rank input" index)

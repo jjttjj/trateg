@@ -1,4 +1,4 @@
-(ns trateg.csv
+(ns ta.data.csv
   (:require [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str])
