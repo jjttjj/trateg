@@ -59,12 +59,12 @@
 
 (defn record->clj [series rec]
   (->> (.getTrades rec)
-       (map (fn [t] {:entry-price (-> t .getEntry .getPrice .doubleValue)
-                     :exit-price  (-> t .getExit .getPrice .doubleValue)
+       (map (fn [t] {:px-entry (-> t .getEntry .getPrice .doubleValue)
+                     :px-exit  (-> t .getExit .getPrice .doubleValue)
                      :entry-time  (->> t .getEntry .getIndex (.getBar series) .getEndTime)
                      :exit-time   (->> t .getExit .getIndex (.getBar series) .getEndTime)
-                     :entry-index (-> t .getEntry .getIndex)
-                     :exit-index  (-> t .getExit .getIndex)}))))
+                     :idx-entry (-> t .getEntry .getIndex)
+                     :idx-exit  (-> t .getExit .getIndex)}))))
 
 
 

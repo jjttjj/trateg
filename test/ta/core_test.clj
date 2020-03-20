@@ -111,12 +111,12 @@
 (deftest test-trades
   (is (every? true?
               (map (fn [mine theirs]
-                     (and (fuzzy= (:entry-price mine) (:entry-price theirs) )
-                          (fuzzy= (:exit-price mine) (:exit-price theirs) )
+                     (and (fuzzy= (:px-entry mine) (:px-entry theirs) )
+                          (fuzzy= (:px-exit mine) (:px-exit theirs) )
                           (= (:entry-time mine) (:entry-time theirs))
                           (= (:exit-time mine) (:exit-time theirs))
-                          (= (:entry-index mine) (:entry-index theirs))
-                          (= (:exit-index mine) (:exit-index theirs))))
+                          (= (:idx-entry mine) (:idx-entry theirs))
+                          (= (:idx-exit mine) (:idx-exit theirs))))
                    trades1
                    (ta4j/record->clj series4j trades4j)))))
 

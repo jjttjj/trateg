@@ -24,15 +24,15 @@
      bars)))
 
 (defn default-entry [bar]
-  {:entry-price (:close bar)
+  {:px-entry (:close bar)
    :entry-time  (:end-zdt bar)
-   :entry-index (:index bar)
+   :idx-entry (:index bar)
    :side        :long})
 
 (defn default-exit [bar]
-  {:exit-price (:close bar)
+  {:px-exit (:close bar)
    :exit-time  (:end-zdt bar)
-   :exit-index (:index bar)})
+   :idx-exit (:index bar)})
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Handlers;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,7 +49,7 @@
 (defn hold-for-exit [{:keys [position current-bar] :as ctx} n]
   (cond-> ctx
     ;;(and position (= (:bars-held position) n))
-    (and position (= (:index current-bar) (+ n (:entry-index position))))
+    (and position (= (:index current-bar) (+ n (:idx-entry position))))
     ;;what if pending exit already exists?
     (update :pending-exit merge (default-exit current-bar))))
 
@@ -118,13 +118,13 @@
                  (and (= :short side) (>= high stop))))
         (update :pending-exit merge
                 (default-exit bar)
-                {:exit-price stop})
+                {:px-exit stop})
         
         (and tp
              (or (and (= side :long) (>= high tp))
                  (and (= side :short) (<= low tp))))
         (update :pending-exit merge
                 (default-exit bar)
-                {:exit-price tp}))
+                {:px-exit tp}))
       ctx)))
 
