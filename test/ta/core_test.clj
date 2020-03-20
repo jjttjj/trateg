@@ -2,11 +2,11 @@
   (:require 
    [clojure.test :refer :all]
    [ta.data.csv :refer [load-csv-bars]]
+   [ta.data.shape :refer :all]
    [ta.series.indicator :as ind]
    [ta.series.ta4j :as ta4j :refer [ind ind-values analysis rule crit-values]]
-   [trateg.core :refer :all]
    [ta.model.stats :refer :all]
-   )
+   [ta.model.single :refer :all])
   (:import [org.ta4j.core Order Order$OrderType]))
 
 

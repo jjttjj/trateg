@@ -6,7 +6,7 @@
                  [net.cgrand/xforms "0.18.2"]
                  [org.ta4j/ta4j-core "0.12"]
                  ]
-  :repl-options {:init-ns trateg.core}
+  :repl-options {:init-ns ta.model.single}
   :source-paths ["src" "dev"]
   :resource-paths ["resources"]
   )
