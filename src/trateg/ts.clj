@@ -1,10 +1,9 @@
 (ns trateg.ts
   (:require
-
    [clojure.string     :as str]
+   [clojure.data.avl :as avl]
    [tick.alpha.api :as t]
-   [tick.interval :as ti]
-   [clojure.data.avl :as avl]))
+   [tick.interval :as ti]))
 
 
 ;; the key is that these tick.interval functions are really powerful:
