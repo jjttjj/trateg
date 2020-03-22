@@ -11,6 +11,9 @@
 ; 5 API requests per minute
 ; 500 requests per day
 
+;; Fingerprint Cards (STO: FING-B) == FING-B.STO
+;; Novo Nordisk (CPH: NOVO-B) == NOVO-B.CPH
+;; BMW (DE: BMW) == BMW.DE
 
 (def api-key (atom "demo"))
 
