@@ -11,3 +11,4 @@ pom.xml.asc
 .hgignore
 .hg/
 /tmp-charts/*
+creds.edn
