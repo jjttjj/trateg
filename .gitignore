@@ -12,3 +12,6 @@ pom.xml.asc
 .hg/
 /tmp-charts/*
 creds.edn
+.settings/
+.classpath
+.project

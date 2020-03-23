@@ -15,11 +15,18 @@
 ;; Novo Nordisk (CPH: NOVO-B) == NOVO-B.CPH
 ;; BMW (DE: BMW) == BMW.DE
 
+
+;; https://github.com/RomelTorres/alpha_vantage/issues/13
+
 (def api-key (atom "demo"))
 
 
-(defn set-key! [key]
-  (reset! api-key key))
+(defn set-key! 
+  "to use alphavantage api, call at least once set-key! api-key"
+  [key]
+  (reset! api-key key)
+  nil ; Important not to return by chance the key, as this would be shown in the notebook.
+  )
 
 
 (defn get-av [params]
@@ -30,9 +37,19 @@
       (cheshire.core/parse-string true)))
 
 
+(defn fix-keywords [m]
+  (let [ks (keys m)
+        vs (vals m)]
+    (zipmap (map #(keyword (second (re-find #"\d+.\s(\w+)" (name %)))) ks) vs)))
+
+
 (defn search [keywords]
-  (get-av {:function "SYMBOL_SEARCH"
-        :keywords keywords}))
+  (->> (get-av {:function "SYMBOL_SEARCH" 
+                :keywords keywords})
+       :bestMatches
+       (map fix-keywords)
+       (into [] )
+       ))
 
 
 (def MetaData (keyword "Meta Data"))
@@ -83,7 +100,7 @@
 (defn convert-bars [request-type response]
   (let [bar-format (if (= request-type TimeSeriesDigitalCurrencyDaily) bar-format-crypto bar-format-standard)
         volume? (= request-type TimeSeriesDaily)
-        _ (println "Bar format: " bar-format)
+        ;_ (println "Bar format: " bar-format)
          ]
     (->> response
        (request-type)
@@ -125,6 +142,13 @@
                :datatype "json"})
       (convert-bars TimeSeriesDigitalCurrencyDaily)))
 
+(defn get-crypto-rating
+  "size: compact=last 100 days. full=entire history"
+  [symbol]
+  (get-av {:function "CRYPTO_RATING"
+                :symbol symbol
+                :datatype "json"}))
+
 
 (comment
 
@@ -142,7 +166,6 @@
       )
 
    (def symbols ["BTC" "ETH" "LTC" "DASH" "NANO" "EOS" "XLM"])
-
 
    (get-daily :compact "MSFT")
    (get-daily-fx :compact "EURUSD")
