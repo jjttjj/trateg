@@ -126,11 +126,7 @@
       (convert-bars TimeSeriesDigitalCurrencyDaily)))
 
 
-
-
 (comment
-
-
 
   (search "BA")
 
@@ -145,8 +141,11 @@
       (clojure.pprint/print-table [:date :open :high :low :close :volume])
       )
 
+   (def symbols ["BTC" "ETH" "LTC" "DASH" "NANO" "EOS" "XLM"])
 
 
-(get-daily :compact "MSFT")
-(get-daily-fx :compact "EURUSD")
-(get-daily-crypto :compact "BTC")
+   (get-daily :compact "MSFT")
+   (get-daily-fx :compact "EURUSD")
+   (get-daily-crypto :compact "BTC")
+
+)
