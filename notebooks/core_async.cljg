@@ -1,0 +1,78 @@
+;; gorilla-repl.fileformat = 2
+
+;; @@ [meta]
+{:tagline "alphavantaget", :tags "trateg,clj,quant"}
+
+;; @@
+
+;; **
+;;; # AlphaVantage data feed
+;;; 
+;;; Alphavantage supports 5 requests a minute / 500 requests a day.
+;; **
+
+;; @@ [clj]
+; Automatically Download Dependencies (if they are not installed already) 
+ (use '[pinkgorilla.helper]) 
+; (pinkgorilla.helper/add-dependencies 
+;   '[[trateg "0.1.2-SNAPSHOT"]
+;     ]
+;   )
+;; @@
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+(ns example.pingpong
+  (:require 
+   [clojure.pprint :refer :all]
+   [clojure.core.async :as async :refer :all]
+   :reload-all))
+;; @@
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+;; From Advanced Go Concurrency Patterns
+;; http://talks.golang.org/2013/advconc.slide#6
+
+(defn player [name table]
+  (go (while true
+        (let [ball (<! table)
+              ball (inc ball)]
+          (prn (str name " " ball))
+          (Thread/sleep 100)
+          (>! table ball)))))
+
+(defn runner []
+  (let [table (chan)
+        ball 0
+        player-1 (player "ping" table)
+        player-2 (player "pong" table)]
+    (>!! table ball)
+    (Thread/sleep 1000)
+    (<!! table)
+    (prn "Done.")))
+
+
+;; @@
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-var"],"#'example.pingpong/runner"],"~:value","#'example.pingpong/runner"]
+;; <=
+
+;; @@ [clj]
+
+ (runner)
+;; @@
+
+;; @@ [clj]
+
+;; @@
+;; ->
+;;; 
+;; <-
+;; =>
+;;; ["^ ","~:type","html","~:value",["~:span"]]
+;; <=
