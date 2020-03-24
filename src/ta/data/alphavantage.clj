@@ -4,8 +4,7 @@
    [cheshire.core] ; JSON Encoding
    [clj-time.core :as t]
    [clj-time.format :as fmt]
-   [throttler.core]
-   ))
+   [throttler.core]))
 
 ;; https://www.alphavantage.co/documentation/#
 
@@ -48,9 +47,8 @@
 ;        Please visit https://www.alphavantage.co/premium/ if you would like to target 
 ;        a higher API call frequency."}
 
-(defn- throtteled? [response] 
+(defn- throtteled? [response]
   (contains? response :Note))
-
 
 (defn- success-if [response process-success]
   (if (throtteled? response)
@@ -211,14 +209,12 @@
   @api-key
 
   (map get-crypto-rating ["BTC" "ETH" "LTC" "DASH" "NANO" "EOS" "XLM"])
-  
+
   (def plust (throttler.core/throttle-fn + 5 :minute))
 
   ; this should be fast
   (time
    (map #(plust 1 %) (range 2)))
-  
+
   (time
-   (map #(plust 1 %) (range 7))) 
-  
-  )
+   (map #(plust 1 %) (range 7))))
