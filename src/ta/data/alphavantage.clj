@@ -3,7 +3,9 @@
    [clj-http.client :as client]
    [cheshire.core] ; JSON Encoding
    [clj-time.core :as t]
-   [clj-time.format :as fmt]))
+   [clj-time.format :as fmt]
+   [throttler.core]
+   ))
 
 ;; https://www.alphavantage.co/documentation/#
 
@@ -56,7 +58,7 @@
     (process-success response)))
 
 
-(defn- get-av [params process-success]
+(defn- get-av-raw [params process-success]
   (-> (client/get "https://www.alphavantage.co/query"
                   {:accept :json
                    :query-params (assoc params :apikey @api-key)})
@@ -64,6 +66,8 @@
       (cheshire.core/parse-string true)
       (success-if process-success)))
 
+(def get-av ; throtteled version
+  (throttler.core/throttle-fn get-av-raw 5 :minute))
 
 ;; Search Symbol
 
@@ -206,4 +210,15 @@
   (set-key! "hhh")
   @api-key
 
-  (map get-crypto-rating ["BTC" "ETH" "LTC" "DASH" "NANO" "EOS" "XLM"]))
+  (map get-crypto-rating ["BTC" "ETH" "LTC" "DASH" "NANO" "EOS" "XLM"])
+  
+  (def plust (throttler.core/throttle-fn + 5 :minute))
+
+  ; this should be fast
+  (time
+   (map #(plust 1 %) (range 2)))
+  
+  (time
+   (map #(plust 1 %) (range 7))) 
+  
+  )

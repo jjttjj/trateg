@@ -8,6 +8,8 @@
    [org.clojure/data.csv "0.1.4"]
    [net.cgrand/xforms "0.18.2"] ; transducers for timeseries
    [org.ta4j/ta4j-core "0.12"] ; ta4j java technical indicator library
+   [throttler "1.0.0"] ; throtteling
+   [org.clojure/core.async "0.4.490"]
    ]
   :repl-options {:init-ns ta.model.single}
   :source-paths ["src" "dev"]
