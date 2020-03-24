@@ -1,4 +1,4 @@
-(defproject trateg "0.1.1-SNAPSHOT"
+(defproject trateg "0.1.2-SNAPSHOT"
   :dependencies
   [[org.clojure/clojure "1.10.1-RC1"]
    [medley "1.2.0"]
