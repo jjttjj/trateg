@@ -6,9 +6,7 @@
 ;; @@
 
 ;; **
-;;; # AlphaVantage data feed
-;;; 
-;;; Alphavantage supports 5 requests a minute / 500 requests a day.
+;;; # Core.async test
 ;; **
 
 ;; @@ [clj]
@@ -28,7 +26,8 @@
   (:require 
    [clojure.pprint :refer :all]
    [clojure.core.async :as async :refer :all]
-   :reload-all))
+   ;:reload-all
+   ))
 ;; @@
 ;; =>
 ;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
@@ -63,9 +62,47 @@
 ;; <=
 
 ;; @@ [clj]
-
- (runner)
+(runner)
+nil
 ;; @@
+;; ->
+;;; "pong 1"
+;;; "ping 2"
+;;; "pong 3"
+;;; "ping 4"
+;;; "pong 5"
+;;; "ping 6"
+;;; "pong 7"
+;;; "ping 8"
+;;; "pong 9"
+;;; "ping 10"
+;;; "pong 11"
+;;; "Done."
+;; <-
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
+
+;; @@ [clj]
+(runner)
+;; @@
+;; ->
+;;; "ping 1"
+;;; "pong 2"
+;;; "ping 3"
+;;; "pong 4"
+;;; "ping 5"
+;;; "pong 6"
+;;; "ping 7"
+;;; "pong 8"
+;;; "ping 9"
+;;; "pong 10"
+;;; "ping 11"
+;;; "Done."
+;; <-
+;; =>
+;;; ["^ ","~:type","~:html","~:content",["~:span",["^ ","~:class","clj-nil"],"nil"],"~:value","nil"]
+;; <=
 
 ;; @@ [clj]
 
