@@ -206,7 +206,7 @@
   (get-daily-crypto :compact "BTC")
 
   (get-crypto-rating "BTC")
-  (set-key! "75CSK2H6C1JCBD5S")
+
   (set-key! "hhh")
   @api-key
 
