@@ -5,9 +5,10 @@
    [clojure.java.io :as io]
    [clojure.string :as str]
    [clj-time.format :as fmt] ;wrapper to joda-date-time
-   [tick.alpha.api :as t]
-   [tick.timezone]
-   [tick.locale-en-us])
+   ;[tick.alpha.api :as t]
+   ;[tick.timezone]
+   ;[tick.locale-en-us]
+   )
   (:import
    [java.time LocalDate LocalTime ZonedDateTime ZoneId]
    java.time.format.DateTimeFormatter))
@@ -72,7 +73,7 @@
 
 ; parse date/time
 
-(defn- parse-date [options date]
+(defn- parse-date [options date time]
   (try
     ;(t/time date)
     (fmt/parse (:date options) date)
@@ -80,10 +81,10 @@
       nil)))
 
 
-#_(def date-fmt (DateTimeFormatter/ofPattern "MM/dd/yyyy"))
-#_(def EST (ZoneId/of "America/New_York"))
+(def date-fmt (DateTimeFormatter/ofPattern "MM/dd/yyyy"))
+(def EST (ZoneId/of "America/New_York"))
 
-#_(defn parse-zoned-date [date time]
+(defn parse-zoned-date [options date time]
     (try
       (ZonedDateTime/of (LocalDate/parse date date-fmt)
                         (LocalTime/parse time)
@@ -92,7 +93,7 @@
         nil)))
 
 (defn- parse-row-data [options date time open high low close volume]
-  {:date   (parse-date options date)
+  {:date   ((:date-parser options) options date time) ; parse-date
    :open   (double-or-nil open)
    :high   (double-or-nil high)
    :low    (double-or-nil low)
@@ -102,7 +103,8 @@
 ; READ bar-series from csv
 
 (def default-options
-  {:date (:date-time fmt/formatters) ; 2020-04-01T00:36:18.206Z
+  {:date-parser parse-date
+   :date (:date-time fmt/formatters) ; 2020-04-01T00:36:18.206Z
    ;:date (fmt/formatter "M/d/yyyy H:m:s a") ; 1/31/1990 12:00:00 AM
    })
 
@@ -128,7 +130,8 @@
 (defn load-csv-bars-trateg
   "this function is here mainly for unit tests and compatibility"
   [file]
-  (let [options {:date (fmt/formatter "MM/dd/yyyy")}]
+  (let [options {:date-parser parse-zoned-date
+                 :date (fmt/formatter "MM/dd/yyyy")}]
     (seq (load-csv-bars options file))))
 
 ; WRITE bar-series to csv

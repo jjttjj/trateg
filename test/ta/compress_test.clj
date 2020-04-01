@@ -1,4 +1,4 @@
-(ns ta.series.compress-test
+#_(ns ta.series.compress-test
   (:require
    [clojure.test :refer :all]
    [ta.data.csv :refer [load-csv-bars]]

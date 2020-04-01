@@ -7,7 +7,7 @@
    [com.taoensso/tufte "2.0.1"] ;performance tracking
    [medley "1.2.0"] ; lightweight, useful, mostly pure functions that are "missing" from clojure.core.
    [clj-time "0.14.3"] ; joda-time wrapper for clj (needed by bybit)
-   [tick "0.4.17-alpha"] ; replacement for clj-time
+   ;[tick "0.4.17-alpha"] ; replacement for clj-time
    [cheshire "5.8.1"] ; JSON encoding
    [clj-http "3.10.0"]  ; http requests (bybit)                        
    [org.clojure/data.csv "0.1.4"] ; read/write csv
